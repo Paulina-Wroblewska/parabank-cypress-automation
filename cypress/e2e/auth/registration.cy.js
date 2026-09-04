@@ -35,4 +35,32 @@ describe('ParaBank - Registration', () => {
     cy.contains('Accounts Overview').should('be.visible')
     cy.contains('Log Out').should('be.visible')
   })
+
+  it('should display validation error when passwords do not match', () => {
+  const user = generateUser()
+
+  cy.visit('/index.htm')
+  cy.contains('Register').click()
+
+  RegistrationPage.firstNameInput().type(user.firstName)
+  RegistrationPage.lastNameInput().type(user.lastName)
+
+  RegistrationPage.streetInput().type(user.address.street)
+  RegistrationPage.cityInput().type(user.address.city)
+  RegistrationPage.stateInput().type(user.address.state)
+  RegistrationPage.zipCodeInput().type(user.address.zipCode)
+
+  RegistrationPage.phoneInput().type(user.phoneNumber)
+  RegistrationPage.ssnInput().type(user.ssn)
+
+  RegistrationPage.usernameInput().type(user.username)
+  RegistrationPage.passwordInput().type(user.password, { log: false })
+
+  RegistrationPage.confirmPasswordInput()
+    .type('DifferentPassword123!', { log: false })
+
+  RegistrationPage.registerButton().click()
+
+  cy.contains('Passwords did not match.').should('be.visible')
+})
 })
