@@ -1,0 +1,10 @@
+{
+  "name": "Test Company",
+  "street": "Business Street 15",
+  "city": "Warsaw",
+  "state": "Mazowieckie",
+  "zipCode": "00-002",
+  "phone": "123456789",
+  "account": "12345678",
+  "amount": "25"
+}
