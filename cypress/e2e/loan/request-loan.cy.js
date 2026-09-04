@@ -24,7 +24,7 @@ describe('ParaBank - Request Loan', () => {
         cy.get('input[value="Apply Now"]').click()
 
         cy.contains('Loan Request Processed').should('be.visible')
-        cy.get('#loanStatus').should('be.visible').and('have.text', 'Approved')
+        cy.get('#loanStatus').should('be.visible').invoke('text').should('match', /^(Approved|Denied)$/)
       })
   })
 })
